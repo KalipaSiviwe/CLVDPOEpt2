@@ -1,0 +1,64 @@
+USE master
+IF EXISTS (SELECT * FROM sys.databases WHERE name = 'POEpt1')
+DROP DATABASE POEpt1
+
+CREATE DATABASE POEpt1
+
+USE POEpt1
+
+--TABLE CREATION
+CREATE TABLE Venues(
+VenueID INT PRIMARY KEY,
+Name VARCHAR (255),
+Location VARCHAR (250),
+Capacity Int
+
+
+);
+
+CREATE TABLE Events(
+EventID INT PRIMARY KEY,
+[Name] VARCHAR(255),
+EventDate Date,
+VenueID INT,
+FOREIGN KEY (VenueID) REFERENCES Venues(VenueID)
+
+
+);
+
+CREATE TABLE Bookings(
+BookingID INT PRIMARY KEY,
+UserID INT,
+EventID INT,
+VenueID INT,
+BookingsDate Date,
+FOREIGN KEY (VenueID) REFERENCES Venues(VenueID),
+
+
+
+);
+
+ALTER TABLE Venues
+ADD ImageUrl VARCHAR (255);
+
+ALTER TABLE Events
+ADD Description VARCHAR(500),
+ImageUrl VARCHAR(255);
+
+ALTER TABLE Bookings
+ADD VenueID INT,
+FOREIGN KEY (VenueID) REFERENCES Venues (VenueID);
+
+--Table Manipulatiom
+USE POEpt1;
+GO
+
+select* from Venues
+select*from Bookings
+select* from Events
+
+SELECT COLUMN_NAME
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME = 'Venues';
+
+SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Venues';
